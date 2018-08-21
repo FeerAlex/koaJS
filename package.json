@@ -39,9 +39,12 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "express": "^4.16.3",
+    "formidable": "^1.2.1",
     "jquery": "^3.3.1",
     "lowdb": "^1.0.0",
+    "nconf": "^0.10.0",
     "normalize.css": "^7.0.0"
   }
 }

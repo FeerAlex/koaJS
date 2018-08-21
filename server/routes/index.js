@@ -9,6 +9,8 @@ router.get('/', ctrlHome.getPage);
 // router.post('/', ctrlHome.sendData);
 
 router.get('/login', ctrlLogin.getPage);
+
 router.get('/admin', ctrlAdmin.getPage);
+router.post('/admin/upload', ctrlAdmin.postItem);
 
 module.exports = router;
