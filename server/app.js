@@ -1,11 +1,40 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const session = require('express-session');
 
 app.set('views', path.join(__dirname, '../source/template'));
 app.set('view engine', 'pug');
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+
+app.use(session({
+  secret: 'loftschool',
+  key: 'sessionkey',
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    maxAge: null
+  },
+  saveUninitialized: false,
+  resave: false
+}));
+
+app.use(flash());
+
+app.use(function(req, res, next) {
+  res.locals.msgskill = req.flash('msgskill');
+  res.locals.msgfile = req.flash('msgfile');
+  next();
+});
+
+app.use('/', express.static(path.join(__dirname, '../public')));
+app.use('/upload', express.static(path.join(__dirname, '../upload')));
 
 app.use('/', require('./routes/index'));
 

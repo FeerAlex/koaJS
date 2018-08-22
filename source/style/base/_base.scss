@@ -65,4 +65,15 @@ body {
   margin: 0 auto;
   font-size: 16px;
   font-weight: 500;
+  text-align: center;
+
+  &.error {
+    border: 1px solid red;
+    background-color: #f5a2a2;
+  }
+
+  &.success {
+    border: 1px solid green;
+    background-color: #8eff8e;
+  }
 }

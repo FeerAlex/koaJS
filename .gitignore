@@ -35,6 +35,9 @@ bower_components
 dist
 build
 public
+upload
+yarn.lock
+server/models/db.json
 
 # Node.JS
 node_modules
