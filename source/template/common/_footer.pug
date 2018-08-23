@@ -5,7 +5,8 @@ footer.footer
           span.title-name__doter .
       .footer__social
         ul.social
-          //- each item in social
+          - var social = ['fa-linkedin-in', 'fa-github-alt', 'fa-tumblr', 'fa-vk']
+          each item in social
             li.social__item
               a.social__link(href="http://")
                 i(class=`fab ${item}`)

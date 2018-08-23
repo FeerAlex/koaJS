@@ -6,7 +6,7 @@ const ctrlLogin = require('../controllers/login');
 const ctrlAdmin = require('../controllers/admin');
 
 router.get('/', ctrlHome.getPage);
-// router.post('/', ctrlHome.sendData);
+router.post('/', ctrlHome.sendMessage);
 
 router.get('/login', ctrlLogin.getPage);
 

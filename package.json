@@ -5,7 +5,8 @@
   "license": "ISC",
   "scripts": {
     "start": "set NODE_ENV=development&& gulp",
-    "build": "set NODE_ENV=production&& gulp build"
+    "build": "set NODE_ENV=production&& gulp build",
+    "server": "node server/app.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -46,7 +47,7 @@
     "formidable": "^1.2.1",
     "jquery": "^3.3.1",
     "lowdb": "^1.0.0",
-    "nconf": "^0.10.0",
+    "nodemailer": "^4.6.8",
     "normalize.css": "^7.0.0"
   }
 }

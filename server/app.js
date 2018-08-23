@@ -30,6 +30,7 @@ app.use(flash());
 app.use(function(req, res, next) {
   res.locals.msgskill = req.flash('msgskill');
   res.locals.msgfile = req.flash('msgfile');
+  res.locals.msgsemail = req.flash('msgsemail');
   next();
 });
 
