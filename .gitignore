@@ -36,9 +36,6 @@ dist
 build
 public
 upload
-yarn.lock
-server/models/db.json
-server/config.json
 
 # Node.JS
 node_modules
