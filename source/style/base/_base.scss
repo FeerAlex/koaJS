@@ -70,10 +70,17 @@ body {
   &.error {
     border: 1px solid red;
     background-color: #f5a2a2;
+    color: red;
   }
 
   &.success {
     border: 1px solid green;
     background-color: #8eff8e;
+    color: green;
   }
+}
+
+.admin-btn {
+  font-size: 5rem;
+  color: #fff;
 }

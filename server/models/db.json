@@ -9,6 +9,11 @@
       "name": "5",
       "price": "4",
       "src": "upload\\115232.jpg"
+    },
+    {
+      "name": "Александр",
+      "price": "345678",
+      "src": "upload\\62341494_p0.png"
     }
   ],
   "skills": [
@@ -29,5 +34,8 @@
       "text": "Лет на сцене в качестве скрипача"
     }
   ],
-  "user": {}
+  "user": {
+    "email": "admin@mail.ru",
+    "pass": "111111"
+  }
 }

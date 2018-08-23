@@ -1,14 +1,11 @@
 extends ../_template-admin
 
-block variables
-  - var title = 'Admin page'
-
 block content
   .wrapper
     header.admin-header
       .container.admin-header__container
         .admin-header__title Административная панель
-        a(href="/").admin-header__link Вернуться на сайт
+        a(href="/logout").admin-header__link Выйти
     section.admin-content
       .container.admin-content__container
         .form-container

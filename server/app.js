@@ -31,11 +31,17 @@ app.use(function(req, res, next) {
   res.locals.msgskill = req.flash('msgskill');
   res.locals.msgfile = req.flash('msgfile');
   res.locals.msgsemail = req.flash('msgsemail');
+  res.locals.msglogin = req.flash('msglogin');
   next();
 });
 
 app.use('/', express.static(path.join(__dirname, '../public')));
 app.use('/upload', express.static(path.join(__dirname, '../upload')));
+
+app.use(function(req,res,next){
+  res.locals.isAdmin = req.session.isAdmin || false;
+  next();
+});
 
 app.use('/', require('./routes/index'));
 
