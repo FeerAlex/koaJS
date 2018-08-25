@@ -1,19 +1,39 @@
 {
   "items": [
     {
-      "name": "sdsd",
-      "price": "1111",
-      "src": "upload\\115232.jpg"
+      "name": "fdfsfff",
+      "price": "554535",
+      "src": "upload\\1366.jpg"
     },
     {
-      "name": "5",
-      "price": "4",
-      "src": "upload\\115232.jpg"
+      "name": "fdfsfds",
+      "price": "44343",
+      "src": "upload\\1366.jpg"
     },
     {
-      "name": "Александр",
-      "price": "345678",
-      "src": "upload\\62341494_p0.png"
+      "name": "fdfsfds",
+      "price": "44343",
+      "src": "upload\\1366.jpg"
+    },
+    {
+      "name": "fdfsfds",
+      "price": "44343",
+      "src": "upload\\1366.jpg"
+    },
+    {
+      "name": "fdfsfds",
+      "price": "44343",
+      "src": "upload\\1366.jpg"
+    },
+    {
+      "name": "fdfsfds",
+      "price": "44343",
+      "src": "upload\\1366.jpg"
+    },
+    {
+      "name": "Тестим",
+      "price": "7567654",
+      "src": "upload\\ANIME-PICTURES.NET_-_526405-2000x2221-original-starpri-single-tall+image-blush-short+hair.jpg"
     }
   ],
   "skills": [
@@ -35,7 +55,8 @@
     }
   ],
   "user": {
-    "email": "admin@mail.ru",
-    "pass": "111111"
+    "login": "admin",
+    "hash": "973b192df051f76b66d947405eddadb4f56cd438bf31dfe42be06f064d5278445a17ccc40f90683011e0f39ef8f3bc01101d05173ccde77f647befe0c5bb690ee1f481ffc6388dfef7630ec029ea172091fa6a70a31ebcc4690a1bd7f2e6d1a4901d67d5e2f18ff6e38e8ad1f83cd772ad443592ce56f4ec5ca0d4a2a3cc23e1e23e85ab49919a32e28c5796f5bcce6b461990c9e4cd00791f6f038bdab7bc7b336c08323e781fa1a33196f2c855b0c3066073c3f7f9be756a702064226805d87b06e6a88953dc774b02e921540b82a5b9dd3184034a8603e7c6f44cda0e0c6f4c628317116df3bd827b04b3dc08b2c8da16513bdcc036a7c075b6f7720734d475007f45d11f7d690df82a95bfcce2099c13cc48f14e9f1215d49862c968f90a2464825e569fe908c7f3bb456b5f6cd2bc938b55e48a6fd34e7db528c6970226f8c788bbeaca70c8a73d35a3391fc927788bd92049f2c707fab645f681b0302239ee7969d2bda0ec0f0d6966d0c23f1a32d11b6b58a79938fe521a03d254892c2f73d3ed9698e8c41a6893e6a1cd4f17c453d989b8933eea12a1f537f1db5c8dadc52184e87af24bc242ad3e9d9a8dca247408976ad76f3f9529ac27971aa70df1e6d6c3b5ae76b9c3c4d6e045b1860467507a1fa90b18c2cab58e015690feda3014fe4612d7b46c8d8cea69eab30c4c56d97515b07048b8ea26867d0e500de5",
+    "salt": "5b0a60875971477ac7985625555df6e1"
   }
 }

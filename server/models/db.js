@@ -8,9 +8,4 @@ const db = low(adapter);
 db.defaults({ items: [], skills: [], user: {} })
   .write();
 
-db.set('user', {
-  email: 'admin@mail.ru',
-  pass: '111111'
-}).write();
-
 module.exports = db;

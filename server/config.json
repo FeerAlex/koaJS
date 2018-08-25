@@ -10,5 +10,15 @@
         "pass": "express201808"
       }
     }
-  }
+  },
+  "session": {
+    "key": "koa:sess",
+    "maxAge": "session",
+    "overwrite": true,
+    "httpOnly": true,
+    "signed": false,
+    "rolling": false,
+    "renew": false
+  },
+  "upload": "./upload"
 }

@@ -1,62 +1,66 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const flash = require('connect-flash');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const session = require('express-session');
+const Koa           = require('koa');
+const app           = new Koa();
+const path          = require('path');
+const fs            = require('fs');
+const static        = require('koa-static');
+const mount         = require('koa-mount');
+const session       = require('koa-session');
+const config        = require(path.join(__dirname, './config.json'));
+const errorHandler  = require('../libs/error');
+const flash         = require('connect-flash');
+// const cookieParser = require('cookie-parser');
+// const bodyParser = require('body-parser');
+// const session = require('express-session');
 
-app.set('views', path.join(__dirname, '../source/template'));
-app.set('view engine', 'pug');
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-
-app.use(session({
-  secret: 'loftschool',
-  key: 'sessionkey',
-  cookie: {
-    path: '/',
-    httpOnly: true,
-    maxAge: null
-  },
-  saveUninitialized: false,
-  resave: false
-}));
-
-app.use(flash());
-
-app.use(function(req, res, next) {
-  res.locals.msgskill = req.flash('msgskill');
-  res.locals.msgfile = req.flash('msgfile');
-  res.locals.msgsemail = req.flash('msgsemail');
-  res.locals.msglogin = req.flash('msglogin');
-  next();
+const Pug = require('koa-pug');
+const pug = new Pug({
+  viewPath: path.join(__dirname, '../source/template'),
+  pretty: false,
+  basedir: path.join(__dirname, '../source/template'),
+  noCache: true,
+  app: app
 });
 
-app.use('/', express.static(path.join(__dirname, '../public')));
-app.use('/upload', express.static(path.join(__dirname, '../upload')));
+app.use(static('./public'));
+app.use(mount('/upload', static('./upload')));
 
-app.use(function(req,res,next){
-  res.locals.isAdmin = req.session.isAdmin || false;
-  next();
+app.use(errorHandler)
+app.on('error', (err, ctx) => {
+  ctx.render('error', {
+    status: ctx.response.status,
+    error: ctx.response.message
+  });
 });
 
-app.use('/', require('./routes/index'));
+const router = require('./routes');
 
-app.use((req, res, next) => {
-  let err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app
+  .use(session(config.session, app))
+  .use(flash())
+  .use(router.routes())
+  .use(router.allowedMethods());
+
+// app.use(async (next) => {
+//   ctx.body.msgskill = this.flash('msgskill');
+//   ctx.body.msgfile = this.flash('msgfile');
+//   ctx.body.msgsemail = this.flash('msgsemail');
+//   ctx.body.msglogin = this.flash('msglogin');
+
+//   this.body = this.flash('info');
+// });
+
+app.listen(3000, () => {
+  if (!fs.existsSync(config.upload)) {
+    fs.mkdirSync(config.upload);
+  }
+  console.log('Server start 3000');
 });
 
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.render('error', {message: err.message, error: err});
-});
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: false}));
+// app.use(cookieParser());
 
-
-const server = app.listen(process.env.PORT || 3000, () => {
-  console.log('Сервер запущен на порте: ' + server.address().port);
-});
+// app.use(function(req,res,next){
+//   res.locals.isAdmin = req.session.isAdmin || false;
+//   next();
+// });

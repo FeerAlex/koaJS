@@ -1,11 +1,14 @@
-const formidable = require('formidable');
 const fs = require('fs');
+const util = require('util');
 const path = require('path');
 const db = require('../models/db');
+const validation = require('../../libs/validation');
+const rename = util.promisify(fs.rename);
+const unlink = util.promisify(fs.unlink);
 
 module.exports = {
-  getPage: (req, res) => {
-    res.render('pages/admin', { title: 'Admin' });
+  getPage: async (ctx, next) => {
+    ctx.render('pages/admin', { title: 'Admin' });
   },
 
   postSkills: (req, res, next) => {
@@ -38,56 +41,34 @@ module.exports = {
     res.redirect("/admin");
   },
 
-  postItem: (req, res, next) => {
-    let form = new formidable.IncomingForm();
-    let upload = path.join('./', 'upload');
-    let fileName;
-  
-    if (!fs.existsSync(upload)) {
-      fs.mkdirSync(upload);
-    }
-  
-    form.uploadDir = path.join(process.cwd(), upload);
-  
-    form.parse(req, function (err, fields, files) {
-      if (err) {
-        return next(err);
-      }
-  
-      const valid = validationUpload(fields, files);
-  
-      if (valid.err) {
-        fs.unlinkSync(files.photo.path);
-        req.flash('msgfile', { 'status': 'error', 'msg': `${valid.status}` });
-        return res.redirect("/admin");
-      }
-  
-      fileName = path.join(upload, files.photo.name);
-  
-      fs.rename(files.photo.path, fileName, function (err) {
-        if (err) {
-          console.error(err);
-          fs.unlinkSync(fileName);
-          fs.rename(files.photo.path, fileName);
-        }
-  
-        db.get('items').push({ name: fields.name, price: fields.price, src: fileName }).write();
-        req.flash('msgfile', { 'status': 'success', 'msg': 'Товар добавлен!'});
-        res.redirect("/admin");
-      });
-    });
-  }
-}
+  postItem: async (ctx, next) => {
+    const { name: itemName, price: itemPrice } = ctx.request.body;
+    const { name: fileName, size: fileSize, path: filePath } = ctx.request.files.photo;
+    const err = validation.items(itemName, itemPrice, fileName, fileSize);
 
-const validationUpload = (fields, files) => {
-  if (files.photo.name === '' || files.photo.size === 0) {
-    return {status: 'Не загружена картинка!', err: true};
+    if (err) {
+      await unlink(filePath);
+      ctx.flash('msgfile', { 'status': 'error', 'msg': `${err.mes}` });
+      
+      return ctx.redirect("/admin");
+    }
+
+    let fullPath = path.join(process.cwd(), 'upload', fileName);
+    const errUpload = await rename(filePath, fullPath);
+
+    if (errUpload) {
+      ctx.flash('msgfile', { 'status': 'error', 'msg': 'Произошла ошибка при загрузке картинки!' });
+      
+      return ctx.redirect("/admin");
+    }
+
+    db.get('items').push({
+      name: itemName,
+      price: itemPrice,
+      src: path.join('upload', fileName)
+    }).write();
+    
+    // ctx.flash('msgfile', { 'status': 'success', 'msg': 'Товар добавлен!'});
+    ctx.redirect("/admin");
   }
-  if (!fields.name) {
-    return {status: 'Не указано название товара!', err: true};
-  }
-  if (!fields.price) {
-    return {status: 'Не указана цена товара!', err: true};
-  }
-  return {status: 'Ok', err: false};
 }

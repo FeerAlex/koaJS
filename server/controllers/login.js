@@ -1,30 +1,32 @@
 const db = require('../models/db');
+const psw = require('../../libs/password');
 
 module.exports = {
-  getPage: (req, res) =>{
-    res.render('pages/login', { title: 'Login' });
+  getPage: async (ctx, next) => {
+    ctx.render('pages/login', { title: 'Login' });
   },
 
-  auth: (req, res) => {
+  auth: async (ctx, next) => {
+    const { email: login, password } = ctx.request.body;
     const user = db.getState().user;
 
-    if (!req.body.email || !req.body.password) {
-      req.flash("msglogin", { status: 'error', msg: 'Заполните все поля!' });
-      return res.redirect("/login");
+    if (!login || !password) {
+      ctx.flash("msglogin", { status: 'error', msg: 'Заполните все поля!' });
+      return ctx.redirect("/login");
     }
 
-    if (req.body.email !== user.email || req.body.password !== user.pass) {
-      req.flash("msglogin", { status: 'error', msg: 'Указаны неверные данные!' });
-      return res.redirect("/login");
+    if (user.login !== login && !psw.validPassword(password)) {
+      ctx.flash("msglogin", { status: 'error', msg: 'Указаны неверные данные!' });
+      return ctx.redirect("/login");
     }
 
-    req.flash("msglogin", { status: 'success', msg: 'Авторизация прошла успешна!' });
-    req.session.isAdmin = true;
-    return res.redirect("/login");
+    ctx.flash("msglogin", { status: 'success', msg: 'Авторизация прошла успешна!' });
+    ctx.session.isAdmin = true;
+    return ctx.redirect("/login");
   },
 
-  logout: (req, res) => {
-    req.session.destroy();
-    res.redirect('/');
+  logout: async (ctx, next) => {
+    ctx.session.destroy();
+    ctx.redirect('/');
   }
 }

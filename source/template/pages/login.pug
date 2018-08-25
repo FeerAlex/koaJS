@@ -15,7 +15,7 @@ block content
                   i(class=`fab ${item}`)
 
       .form-login
-        each msg in msglogin
+        //- each msg in msglogin
           div(class=`status ${msg.status}`)= msg.msg
         if (isAdmin)
           a(href="/admin").admin-btn Админка
