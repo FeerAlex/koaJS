@@ -1,44 +1,51 @@
-const fs = require('fs');
-const util = require('util');
-const path = require('path');
-const db = require('../models/db');
-const validation = require('../../libs/validation');
-const rename = util.promisify(fs.rename);
-const unlink = util.promisify(fs.unlink);
+const fs          = require('fs');
+const util        = require('util');
+const path        = require('path');
+const db          = require('../models/db');
+const validation  = require('../../libs/validation');
+const rename      = util.promisify(fs.rename);
+const unlink      = util.promisify(fs.unlink);
 
 module.exports = {
   getPage: async (ctx, next) => {
-    ctx.render('pages/admin', { title: 'Admin' });
+    ctx.render('pages/admin', {
+      title: 'Admin',
+      msgskill: ctx.flash("msgskill"),
+      msgfile: ctx.flash("msgfile"),
+    });
   },
 
-  postSkills: (req, res, next) => {
-    if (!req.body.age || !req.body.concerts || !req.body.cities || !req.body.years) {
-      req.flash("msgskill", { status: 'error', msg: 'Все поля нужно заполнить!' });
-      return res.redirect("/admin");
+  postSkills: async (ctx, next) => {
+    const { age, concerts, cities, years } = ctx.request.body;
+    const err = validation.skills(age, concerts, cities, years);
+
+    if (err) {
+      ctx.flash("msgskill", { status: 'error', msg: err });
+      return ctx.redirect("/admin");
     }
   
     let skills = [
       {
-        "number": req.body.age,
+        "number": age,
         "text": "Возраст начала занятий на скрипке"
       },
       {
-        "number": req.body.concerts,
+        "number": concerts,
         "text": "Концертов отыграл"
       },
       {
-        "number": req.body.cities,
+        "number": cities,
         "text": "Максимальное число городов в туре"
       },
       {
-        "number": req.body.years,
+        "number": years,
         "text": "Лет на сцене в качестве скрипача"
       }
     ];
   
     db.set('skills', skills).write();
-    req.flash('msgskill', {'status': 'success', 'msg': 'Скилы добавлены!'});
-    res.redirect("/admin");
+    ctx.flash('msgskill', {'status': 'success', 'msg': 'Скилы добавлены!'});
+    ctx.redirect("/admin");
   },
 
   postItem: async (ctx, next) => {
@@ -48,7 +55,7 @@ module.exports = {
 
     if (err) {
       await unlink(filePath);
-      ctx.flash('msgfile', { 'status': 'error', 'msg': `${err.mes}` });
+      ctx.flash('msgfile', { 'status': 'error', 'msg': err });
       
       return ctx.redirect("/admin");
     }
@@ -68,7 +75,7 @@ module.exports = {
       src: path.join('upload', fileName)
     }).write();
     
-    // ctx.flash('msgfile', { 'status': 'success', 'msg': 'Товар добавлен!'});
+    ctx.flash('msgfile', { 'status': 'success', 'msg': 'Товар добавлен!'});
     ctx.redirect("/admin");
   }
 }

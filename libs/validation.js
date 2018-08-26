@@ -1,31 +1,39 @@
 module.exports = {
     items: (itemName, itemPrice, fileName, fileSize) => {
-        let res;
-    
-        if (itemName === '') {
-            res = {
-              mes: 'Не указано название товара'
-            }
+        let mes;
+
+        if (itemPrice === '') {
+            mes = 'Не указана цена товара';
         }
     
-        if (itemPrice === '') {
-            res = {
-              mes: 'Не указана цена товара'
-            }
+        if (itemName === '') {
+            mes = 'Не указано название товара';
         }
     
         if (fileName === '' || fileSize === 0) {
-            response = {
-              mes: 'Не загружена картинка'
-            }
+            mes = 'Не загружена картинка';
         }
         
-        return res;
+        return mes;
     },
 
-    skills: () => {
-        let res;
+    skills: (age, concerts, cities, years) => {
+        let mes;
 
-        return res;
+        if (!age || !concerts || !cities || !years) {
+            mes = 'Заполните все поля!';
+        }
+
+        return mes;
+    },
+
+    message: (name, email, message) => {
+        let mes;
+
+        if (!name || !email || !message) {
+            mes = 'Заполните все поля!';
+        }
+
+        return mes;
     }
 }

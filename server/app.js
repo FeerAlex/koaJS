@@ -7,10 +7,7 @@ const mount         = require('koa-mount');
 const session       = require('koa-session');
 const config        = require(path.join(__dirname, './config.json'));
 const errorHandler  = require('../libs/error');
-const flash         = require('connect-flash');
-// const cookieParser = require('cookie-parser');
-// const bodyParser = require('body-parser');
-// const session = require('express-session');
+const flash         = require('koa-connect-flash');
 
 const Pug = require('koa-pug');
 const pug = new Pug({
@@ -40,27 +37,9 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-// app.use(async (next) => {
-//   ctx.body.msgskill = this.flash('msgskill');
-//   ctx.body.msgfile = this.flash('msgfile');
-//   ctx.body.msgsemail = this.flash('msgsemail');
-//   ctx.body.msglogin = this.flash('msglogin');
-
-//   this.body = this.flash('info');
-// });
-
 app.listen(3000, () => {
   if (!fs.existsSync(config.upload)) {
     fs.mkdirSync(config.upload);
   }
   console.log('Server start 3000');
 });
-
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: false}));
-// app.use(cookieParser());
-
-// app.use(function(req,res,next){
-//   res.locals.isAdmin = req.session.isAdmin || false;
-//   next();
-// });

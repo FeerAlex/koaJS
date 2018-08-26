@@ -1,7 +1,8 @@
 section.form
   .container
-    //- each msg in msgsemail
-      div(class=`status ${msg.status}`)= msg.msg
+    if (msgsemail)
+      each msg in msgsemail
+        div(class=`status ${msg.status}`)= msg.msg
     .form__subtitle.subtitle Контактные данные
     h2.form__title.title Пишите, пообщаемся
     form(action="/" method="POST").form-email

@@ -55,6 +55,7 @@
     "koa-static": "^5.0.0",
     "lowdb": "^1.0.0",
     "nodemailer": "^4.6.8",
+    "nodemon": "^1.18.3",
     "normalize.css": "^7.0.0"
   }
 }

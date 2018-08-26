@@ -1,62 +1,47 @@
 {
   "items": [
     {
-      "name": "fdfsfff",
-      "price": "554535",
-      "src": "upload\\1366.jpg"
-    },
-    {
-      "name": "fdfsfds",
-      "price": "44343",
-      "src": "upload\\1366.jpg"
-    },
-    {
-      "name": "fdfsfds",
-      "price": "44343",
-      "src": "upload\\1366.jpg"
-    },
-    {
-      "name": "fdfsfds",
-      "price": "44343",
-      "src": "upload\\1366.jpg"
-    },
-    {
-      "name": "fdfsfds",
-      "price": "44343",
-      "src": "upload\\1366.jpg"
-    },
-    {
-      "name": "fdfsfds",
-      "price": "44343",
-      "src": "upload\\1366.jpg"
-    },
-    {
       "name": "Тестим",
       "price": "7567654",
       "src": "upload\\ANIME-PICTURES.NET_-_526405-2000x2221-original-starpri-single-tall+image-blush-short+hair.jpg"
+    },
+    {
+      "name": "Александр",
+      "price": "123213",
+      "src": "upload\\ANIME-PICTURES.NET_-_559703-6631x3687-original-chyopeuteu-long+hair-single-blush-looking+at+viewer.jpg"
+    },
+    {
+      "name": "fdfd",
+      "price": "42334",
+      "src": "upload\\ANIME-PICTURES.NET_-_560089-1920x1080-girls+frontline-hk416+%28girls+frontline%29-ump45+%28girls+frontline%29-ump9+%28girls+frontline%29-g11+%28girls+frontline%29-dinergate+%28girls+frontline%29.jpg"
+    },
+    {
+      "name": "dsdsd",
+      "price": "1111",
+      "src": "upload\\ANIME-PICTURES.NET_-_563819-1920x1200-shingeki+no+bahamut-dark+angel+olivia-cait-long+hair-single-looking+at+viewer.jpg"
     }
   ],
   "skills": [
     {
-      "number": "5",
+      "number": "6",
       "text": "Возраст начала занятий на скрипке"
     },
     {
-      "number": "4",
+      "number": "5",
       "text": "Концертов отыграл"
     },
     {
-      "number": "5",
+      "number": "4",
       "text": "Максимальное число городов в туре"
     },
     {
-      "number": "5",
+      "number": "3",
       "text": "Лет на сцене в качестве скрипача"
     }
   ],
   "user": {
-    "login": "admin",
-    "hash": "973b192df051f76b66d947405eddadb4f56cd438bf31dfe42be06f064d5278445a17ccc40f90683011e0f39ef8f3bc01101d05173ccde77f647befe0c5bb690ee1f481ffc6388dfef7630ec029ea172091fa6a70a31ebcc4690a1bd7f2e6d1a4901d67d5e2f18ff6e38e8ad1f83cd772ad443592ce56f4ec5ca0d4a2a3cc23e1e23e85ab49919a32e28c5796f5bcce6b461990c9e4cd00791f6f038bdab7bc7b336c08323e781fa1a33196f2c855b0c3066073c3f7f9be756a702064226805d87b06e6a88953dc774b02e921540b82a5b9dd3184034a8603e7c6f44cda0e0c6f4c628317116df3bd827b04b3dc08b2c8da16513bdcc036a7c075b6f7720734d475007f45d11f7d690df82a95bfcce2099c13cc48f14e9f1215d49862c968f90a2464825e569fe908c7f3bb456b5f6cd2bc938b55e48a6fd34e7db528c6970226f8c788bbeaca70c8a73d35a3391fc927788bd92049f2c707fab645f681b0302239ee7969d2bda0ec0f0d6966d0c23f1a32d11b6b58a79938fe521a03d254892c2f73d3ed9698e8c41a6893e6a1cd4f17c453d989b8933eea12a1f537f1db5c8dadc52184e87af24bc242ad3e9d9a8dca247408976ad76f3f9529ac27971aa70df1e6d6c3b5ae76b9c3c4d6e045b1860467507a1fa90b18c2cab58e015690feda3014fe4612d7b46c8d8cea69eab30c4c56d97515b07048b8ea26867d0e500de5",
-    "salt": "5b0a60875971477ac7985625555df6e1"
+    "login": "admin@mail.ru",
+    "hash": "0377d4aed0c96328fcdf0b97345721b29e051731ba292b3e048e40c91b248a0df2d2c2ac3af40a8f8b3d6ae727d66603539162932e51da845b081ce3cbcf2524924a515f75ef98908e5f5ec94650748698d0223cf3d6faf97ca3bfd75a7e241f4460d2fc9c80183d031cc45a42f4ef1760e68bd9a91809ba164d041749f35df47d2e46236ee59c8c59a0a2b54b4041eb6a8de906b7f252e8f24852d766452b776360ca7ef088d9cfffa5466dbb9c3ed8ebf08ef21378a76c1b05779ccf994c26972e138249eee50604cb3a34a90553c77e841b192a63dce1e937d4f5b961263f252a908db734e1d4e53b1058151d316fff24b97cb7bf277b700c49b592d2b3ace6f0989c9073670689d727bb57a3ba12d3aa105093547b81717f6dc0e42ebddaad3eb9a586bdfd025efdf98512e281d88c375a358836f231ebbec4e6ae0cce19ba35abdc0b2aa05e04a27770b8cec1bb54bfcd808b114928f34acc061442436f21ff8e6dad86a495121575775f6c6b428612280fb5c5fdff1f395bfb21cd90e0cd7c1735a9cbccecf1df0370fae4f9d199b492d3470126b3aff5dab4f463e432943b07c09d835210f31c9fe4fa09863344bf5e7ede477f4cad9012414a71b72df9cef821799ade54cf177d640deb74eb0dbeecaa1e63097b0ca03c0f43d8bd6842a6c7e0a725de0e60572a14aef926bb49e4725eb99ee8ab6bfae6992be247c6",
+    "salt": "9535df869a97312954b8aa74a435486e"
   }
 }

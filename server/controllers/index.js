@@ -1,7 +1,9 @@
-const db = require('../models/db');
-// const nodemailer = require('nodemailer');
-const path = require('path');
-const config = require(path.join(__dirname, '../config.json'));
+const db          = require('../models/db');
+const nodemailer  = require('nodemailer');
+const path        = require('path');
+const util        = require('util');
+const validation  = require('../../libs/validation');
+const config      = require(path.join(__dirname, '../config.json'));
 
 module.exports = {
   getPage: async (ctx, next) => {
@@ -11,32 +13,37 @@ module.exports = {
     ctx.render('pages/index', {
       title: 'Главная',
       products: products,
-      skills: skills
+      skills: skills,
+      msgsemail: ctx.flash("msgsemail")
     });
   },
 
-//   sendMessage: (req, res, next) => {
-//     if (!req.body.name || !req.body.email || !req.body.message) {
-//       req.flash("msgsemail", { status: 'error', msg: 'Все поля нужно заполнить!' });
-//       return res.redirect("/");
-//     }
+  sendMessage: async (ctx, next) => {
+    const { name, email, message } = ctx.request.body;
+    const err = validation.message(name, email, message);
 
-//     const transporter = nodemailer.createTransport(config.mail.smtp);
-//     const mailOptions = {
-//       from: `"${req.body.name}" <${req.body.email}>`,
-//       to: config.mail.smtp.auth.user,
-//       subject: config.mail.subject,
-//       text: req.body.message.trim().slice(0, 500) + `\n Отправлено с: <${req.body.email}>`
-//     };
+    if (err) {
+      ctx.flash("msgsemail", { status: 'error', msg: 'Все поля нужно заполнить!' });
+      return ctx.redirect("/");
+    }
 
-//     transporter.sendMail(mailOptions, function(error, info) {
-//       //если есть ошибки при отправке - сообщаем об этом
-//       if (error) {
-//         req.flash("msgsemail", { status: 'error', msg: `При отправке письма произошла ошибка!: ${error}` });
-//         return res.redirect("/");
-//       }
-//       req.flash("msgsemail", { status: 'success', msg: `Письмо успешно отправлено!` });
-//       return res.redirect("/");
-//     });
-//   }
+    const transporter = nodemailer.createTransport(config.mail.smtp);
+    const mailOptions = {
+      from: `"${name}" <${email}>`,
+      to: config.mail.smtp.auth.user,
+      subject: config.mail.subject,
+      text: message.trim().slice(0, 500) + `\n Отправлено с: <${email}>`
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      ctx.flash("msgsemail", { status: 'success', msg: 'Письмо успешно отправлено!' });
+      
+      return ctx.redirect("/");
+    } catch (error) {
+      ctx.flash("msgsemail", { status: 'error', msg: `При отправке письма произошла ошибка!: ${error}` });
+        
+      return ctx.redirect("/");
+    }
+  }
 }
